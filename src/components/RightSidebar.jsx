@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { FaCirclePlus } from "react-icons/fa6";
 import { IoMdCloseCircle } from "react-icons/io";
+import Image from "next/image";
 
 const RightSidebar = ({ isRightSidebar, info, setInfo }) => {
   const [image, setImage] = useState("");
@@ -67,20 +68,22 @@ const RightSidebar = ({ isRightSidebar, info, setInfo }) => {
                 left: 0,
               }}
             />
-            <img
+            <Image
               src={
                 image
                   ? image
                   : "https://png.pngtree.com/png-vector/20190820/ourmid/pngtree-no-image-vector-illustration-isolated-png-image_1694547.jpg"
               }
-              alt={"image"}
-              className="w-[210px] h-[230px] text-center cursor-pointer"
+              alt="image"
+              width={210}
+              height={230}
+              className="cursor-pointer"
               style={{
                 objectFit: "cover",
                 borderRadius: "6px",
                 alignSelf: "center",
-                cursor: "pointer",
               }}
+              placeholder="blur"
             />
           </div>
 

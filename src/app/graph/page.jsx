@@ -119,6 +119,117 @@ const DnDFlow = () => {
     event.dataTransfer.dropEffect = "move";
   }, []);
 
+  // const onDrop = useCallback(
+  //   (event) => {
+  //     event.preventDefault();
+
+  //     if (!isSave) {
+  //       alert("Please first enter label");
+  //       return;
+  //     }
+
+  //     // check if the dropped element is valid
+  //     if (!type) {
+  //       return;
+  //     }
+
+  //     // console.log(type);
+
+  //     // project was renamed to screenToFlowPosition
+  //     // and you don't need to subtract the reactFlowBounds.left/top anymore
+  //     // details: https://reactflow.dev/whats-new/2023-11-10
+  //     const position = screenToFlowPosition({
+  //       x: event.clientX,
+  //       y: event.clientY,
+  //     });
+  //     const newNode = {
+  //       id: getId(),
+  //       type: "straight",
+  //       position,
+  //       // markerEnd: {
+  //       //   type: MarkerType.Arrow,
+  //       //   width: 20,
+  //       //   height: 20,
+  //       //   color: "red",
+  //       // },
+  //       data: {
+  //         label: (
+  //           <div
+  //             className="flex items-center gap-1 flex-start"
+  //           // onClick={() => clickNode(type, getId())}
+  //           >
+  //             {type == "phone" && <FaPhoneAlt className={"node_icon"} />}
+  //             {type == "email" && (
+  //               <MdOutlineMarkEmailUnread className={"node_icon"} />
+  //             )}
+  //             {type == "username" && (
+  //               <MdOutlineAlternateEmail className={"node_icon"} />
+  //             )}
+  //             {type == "instagram" && <FaInstagram className={"node_icon"} />}
+  //             {type == "facebook" && (
+  //               <FaSquareFacebook className={"node_icon"} />
+  //             )}
+  //             {type == "telegram" && (
+  //               <FaTelegramPlane className={"node_icon"} />
+  //             )}
+  //             {type == "discord" && <FaDiscord className={"node_icon"} />}
+  //             {type == "person" && <BsPersonCircle className={"node_icon"} />}
+  //             {type == "photo" && (
+  //               <HiOutlinePhotograph className={"node_icon"} />
+  //             )}
+  //             {type == "group" && <TiGroup className={"node_icon"} />}
+  //             {type == "association" && <MdGroup className={"node_icon"} />}
+  //             {type == "forums" && <MdForum className={"node_icon"} />}
+  //             {type == "account" && (
+  //               <MdAccountBalanceWallet className={"node_icon"} />
+  //             )}
+  //             {type == "darkweb" && <RiPagesFill className={"node_icon"} />}
+  //             {type == "waybackmachine" && (
+  //               <MdOutlineAccountBalance className={"node_icon"} />
+  //             )}
+  //             {type == "bitcoin" && (
+  //               <BsCurrencyBitcoin className={"node_icon"} />
+  //             )}
+  //             {type == "ethereum" && <FaEthereum className={"node_icon"} />}
+  //             {type == "solana" && <SiSolana className={"node_icon"} />}
+  //             {type == "litecoin" && <SiLitecoin className={"node_icon"} />}
+  //             {type == "ip" && <GoGlobe className={"node_icon"} />}
+
+  //             {nodeId !== 1 ? (
+  //               <>
+  //                 <input
+  //                   className="text-gray-500 w-[50px] bg-[black] rounded-[2px] text-[12px] px-2 node_input"
+  //                   type={"text"}
+  //                   placeholder="Enter label"
+  //                   // value={inputValue}
+  //                   onChange={(e) => setInputValue(e.target.value)}
+  //                 />
+  //                 <button
+  //                   className="save_btn"
+  //                   onClick={() => save(getId(), inputValue)}
+  //                 >
+  //                   Save
+  //                 </button>
+  //               </>
+  //             ) : (
+  //               <p className="w-[100px]">{inputValue}</p>
+  //             )}
+  //           </div>
+  //         ),
+  //       },
+  //       style: {
+  //         strokeWidth: 2,
+  //         stroke: "#FF0072",
+  //       },
+  //     };
+
+  //     setNodes((nds) => nds.concat(newNode));
+  //     setIsSave(false);
+  //   },
+  //   [screenToFlowPosition, type, nodeId]
+  // );
+
+
   const onDrop = useCallback(
     (event) => {
       event.preventDefault();
@@ -128,80 +239,48 @@ const DnDFlow = () => {
         return;
       }
 
-      // check if the dropped element is valid
       if (!type) {
         return;
       }
 
-      // console.log(type);
-
-      // project was renamed to screenToFlowPosition
-      // and you don't need to subtract the reactFlowBounds.left/top anymore
-      // details: https://reactflow.dev/whats-new/2023-11-10
       const position = screenToFlowPosition({
         x: event.clientX,
         y: event.clientY,
       });
+
       const newNode = {
         id: getId(),
         type: "straight",
         position,
-        // markerEnd: {
-        //   type: MarkerType.Arrow,
-        //   width: 20,
-        //   height: 20,
-        //   color: "red",
-        // },
         data: {
           label: (
-            <div
-              className="flex items-center gap-1 flex-start"
-              // onClick={() => clickNode(type, getId())}
-            >
-              {type == "phone" && <FaPhoneAlt className={"node_icon"} />}
-              {type == "email" && (
-                <MdOutlineMarkEmailUnread className={"node_icon"} />
-              )}
-              {type == "username" && (
-                <MdOutlineAlternateEmail className={"node_icon"} />
-              )}
-              {type == "instagram" && <FaInstagram className={"node_icon"} />}
-              {type == "facebook" && (
-                <FaSquareFacebook className={"node_icon"} />
-              )}
-              {type == "telegram" && (
-                <FaTelegramPlane className={"node_icon"} />
-              )}
-              {type == "discord" && <FaDiscord className={"node_icon"} />}
-              {type == "person" && <BsPersonCircle className={"node_icon"} />}
-              {type == "photo" && (
-                <HiOutlinePhotograph className={"node_icon"} />
-              )}
-              {type == "group" && <TiGroup className={"node_icon"} />}
-              {type == "association" && <MdGroup className={"node_icon"} />}
-              {type == "forums" && <MdForum className={"node_icon"} />}
-              {type == "account" && (
-                <MdAccountBalanceWallet className={"node_icon"} />
-              )}
-              {type == "darkweb" && <RiPagesFill className={"node_icon"} />}
-              {type == "waybackmachine" && (
-                <MdOutlineAccountBalance className={"node_icon"} />
-              )}
-              {type == "bitcoin" && (
-                <BsCurrencyBitcoin className={"node_icon"} />
-              )}
-              {type == "ethereum" && <FaEthereum className={"node_icon"} />}
-              {type == "solana" && <SiSolana className={"node_icon"} />}
-              {type == "litecoin" && <SiLitecoin className={"node_icon"} />}
-              {type == "ip" && <GoGlobe className={"node_icon"} />}
-
+            <div className="flex items-center gap-1 flex-start">
+              {type === "phone" && <FaPhoneAlt className="node_icon" />}
+              {type === "email" && <MdOutlineMarkEmailUnread className="node_icon" />}
+              {type === "username" && <MdOutlineAlternateEmail className="node_icon" />}
+              {type === "instagram" && <FaInstagram className="node_icon" />}
+              {type === "facebook" && <FaSquareFacebook className="node_icon" />}
+              {type === "telegram" && <FaTelegramPlane className="node_icon" />}
+              {type === "discord" && <FaDiscord className="node_icon" />}
+              {type === "person" && <BsPersonCircle className="node_icon" />}
+              {type === "photo" && <HiOutlinePhotograph className="node_icon" />}
+              {type === "group" && <TiGroup className="node_icon" />}
+              {type === "association" && <MdGroup className="node_icon" />}
+              {type === "forums" && <MdForum className="node_icon" />}
+              {type === "account" && <MdAccountBalanceWallet className="node_icon" />}
+              {type === "darkweb" && <RiPagesFill className="node_icon" />}
+              {type === "waybackmachine" && <MdOutlineAccountBalance className="node_icon" />}
+              {type === "bitcoin" && <BsCurrencyBitcoin className="node_icon" />}
+              {type === "ethereum" && <FaEthereum className="node_icon" />}
+              {type === "solana" && <SiSolana className="node_icon" />}
+              {type === "litecoin" && <SiLitecoin className="node_icon" />}
+              {type === "ip" && <GoGlobe className="node_icon" />}
               {nodeId !== 1 ? (
                 <>
                   <input
                     className="text-gray-500 w-[50px] bg-[black] rounded-[2px] text-[12px] px-2 node_input"
-                    type={"text"}
+                    type="text"
                     placeholder="Enter label"
-                    // value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                   />
                   <button
@@ -226,7 +305,7 @@ const DnDFlow = () => {
       setNodes((nds) => nds.concat(newNode));
       setIsSave(false);
     },
-    [screenToFlowPosition, type, nodeId]
+    [screenToFlowPosition, type, nodeId, inputValue, isSave, setNodes]
   );
 
   const save = (id, val) => {
@@ -321,7 +400,7 @@ const DnDFlow = () => {
     //     // });
     //   }
     // });
-  }, [nodeId]);
+  }, [nodeId, nodes, setNodes, type, inputValue]);
 
   // useEffect(() => {
   //   setNodes((nds) =>
@@ -385,7 +464,7 @@ const DnDFlow = () => {
             connectionLineComponent={CustomConnectionLine}
             connectionLineStyle={connectionLineStyle}
             edgeTypes={edgeTypes}
-            // nodeTypes={nodeTypes}
+          // nodeTypes={nodeTypes}
           >
             {/* <LayoutToggle /> */}
             <Panel position="top-left">
